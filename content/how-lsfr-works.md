@@ -29,7 +29,7 @@ See [this guide](/guides/cli/#installation) on how to install _lsfr_ on your sys
 
 Start with the [distributed key-value store challenge](/kv-store); it's a great introduction to distributed systems concepts. Check the challenge's page for details on the first stage.
 
-### Get the Scaffold
+### Scaffolding
 
 Run `lsfr new kv-store` to create a new challenge directory with:
 
@@ -39,7 +39,7 @@ Run `lsfr new kv-store` to create a new challenge directory with:
 
 Update `run.sh` with the commands to build and run your implementation. You can use _any_ language - Go, Python, Rust, even Ponylang - as long as `run.sh` can start your program and pass through any command-line arguments from `lsfr test`.
 
-## Implement and Test
+## Implement & Test
 
 Write your implementation in any language to solve the challenge's first stage. When ready, run `lsfr test` to verify your solution works correctly. The tests focus on behavior, not implementation details.
 
