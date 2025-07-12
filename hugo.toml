@@ -5,11 +5,14 @@ theme = "hugo-book"
 enableGitInfo = true
 enableRobotsTXT = true
 
-disableKinds = ["taxonomy", "rss"]
+disableKinds = ["taxonomy", "term", "rss"]
 
 [params]
   BookTheme = "auto"
+  BookFavicon = "fa-feather.svg"
+
   BookSection = "*"
+
   BookComments = false
 
 [menu]
