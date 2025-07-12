@@ -1,0 +1,11 @@
+{{- $url := .RelPermalink -}}
+{{- $match := false -}}
+{{- range .Site.Params.Challenges }}
+  {{- if hasPrefix $url (printf "/%s/" .) }}
+    {{- $match = true -}}
+  {{- end }}
+{{- end }}
+
+{{ if $match }}
+  <div class="giscus"></div>
+{{ end }}

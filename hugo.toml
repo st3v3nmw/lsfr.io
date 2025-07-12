@@ -16,6 +16,10 @@ disableKinds = ["taxonomy", "term", "rss"]
 
   BookComments = false
 
+  Challenges = [
+    "kv-store",
+  ]
+
 [menu]
  [[menu.after]]
   name = "Github"
