@@ -12,4 +12,4 @@ Named after the song [_"Love Songs For Robots"_](https://www.youtube.com/watch?v
 
 I hope this helps someone out there actually build these systems and learn how they work. I'll be adding more challenges over time 😅.
 
-Built with ❤️ by [Stephen Mwangi](https://www.stephenmwangi.com/).
+Built with ❤️ by [Stephen Mwangi](https://www.stephenmwangi.com/) | Content: [CC BY 4.0](https://github.com/st3v3nmw/lsfr.io/blob/main/LICENSE)
