@@ -1,19 +1,21 @@
-baseURL = 'https://lsfr.io/'
-languageCode = 'en-us'
-title = 'lsfr.io'
-theme = 'hugo-book'
+baseURL = "https://lsfr.io/"
+languageCode = "en-us"
+title = "lsfr.io"
+theme = "hugo-book"
+enableGitInfo = true
+enableRobotsTXT = true
 
-disableKinds = ['taxonomy']
+disableKinds = ["taxonomy", "rss"]
+
+[params]
+  BookTheme = "auto"
+  BookSection = "*"
+  BookComments = false
 
 [menu]
  [[menu.after]]
   name = "Github"
   url = "https://github.com/st3v3nmw/lsfr"
-
-[params]
-  BookTheme = 'auto'
-  BookSection = '*'
-  BookComments = false
 
 # Needed for mermaid/katex shortcodes
 [markup]
