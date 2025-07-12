@@ -1,0 +1,40 @@
+@font-face {
+  font-family: 'et-book';
+  src: url('/fonts/et-book-roman-line-figures.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'et-book';
+  src: url('/fonts/et-book-roman-old-style-figures.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-variant-numeric: oldstyle-nums;
+}
+
+@font-face {
+  font-family: 'et-book';
+  src: url('/fonts/et-book-bold-line-figures.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'et-book';
+  src: url('/fonts/et-book-semi-bold-old-style-figures.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'et-book';
+  src: url('/fonts/et-book-display-italic-old-style-figures.woff') format('woff');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'jet-brains-mono';
+  src: url('/fonts/jet-brains-mono-regular.woff2') format('woff2')
+}

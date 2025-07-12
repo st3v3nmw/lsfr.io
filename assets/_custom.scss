@@ -1,0 +1,33 @@
+.container {
+  max-width: 90rem;
+}
+
+body {
+  font-family: 'et-book', serif;
+  font-weight: 400;
+  font-style: normal;
+  font-variant-numeric: oldstyle-nums;
+  font-size: 1.25rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'et-book', serif;
+  font-weight: 600;
+  font-variant-numeric: oldstyle-nums;
+}
+
+code {
+  font-family: 'jet-brains-mono';
+}
+
+strong {
+  font-weight: 700;
+}
+
+em {
+  font-style: italic;
+}
+
+.book-toc, .book-menu {
+  font-size: 1rem;
+}
