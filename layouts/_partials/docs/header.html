@@ -3,7 +3,7 @@
     <img src="{{ "svg/menu.svg" | relURL }}" class="book-icon" alt="Menu" />
   </label>
 
-  <h3><i>{{ .Site.Title }}</i></h3>
+  <h3><i><a href="/" style="color: inherit; text-decoration: none;">{{ .Site.Title }}</a></i></h3>
 
   <label for="toc-control">
     {{ if default true (default .Site.Params.BookToC .Params.BookToC) }}
