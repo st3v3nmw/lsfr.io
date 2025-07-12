@@ -10,6 +10,7 @@ disableKinds = ["taxonomy", "term", "rss"]
 [params]
   BookTheme = "auto"
   BookFavicon = "fa-feather.svg"
+  BookLogo = "fa-feather.svg"
 
   BookSection = "*"
 
