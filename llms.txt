@@ -1,5 +1,8 @@
 # lsfr
 
-_lsfr_ is a platform for learning how to build complex systems from scratch. It helps developers tackle challenges like distributed databases, compilers, and message queues by breaking them down into manageable stages with progressive testing.
+_lsfr_ is a platform for learning how to build complex systems from scratch.
+
+It helps developers tackle challenges like distributed databases, compilers,
+and message queues by breaking them down into manageable stages with progressive testing.
 
 // TODO
