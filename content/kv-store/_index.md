@@ -25,7 +25,7 @@ Add durability to your store. Data should survive clean shutdowns (SIGTERM).
 
 3. [Crash Recovery](/kv-store/crash-recovery)
 
-Handle unclean shutdowns (SIGKILL). Ensure data consistency after crashes.
+Ensure data consistency after crashes. Data should survive unclean shutdowns (SIGKILL).
 
 4. [Clustering](/kv-store/clustering)
 
@@ -61,4 +61,7 @@ If you haven't already, read [this overview](/how-lsfr-works) on how _lsfr_ work
 ### Videos
 
 - [Distributed Systems lecture series](https://www.youtube.com/playlist?list=PLeKd45zvjcDFUEv_ohr_HdUFe97RItdiB) by Martin Kleppmann
-- [Intro to Database Systems](https://www.youtube.com/playlist?list=PLSE8ODhjZXjYDBpQnSymaectKjxCy6BYq) by CMU Database Group
+
+### Implementations
+
+- [little-key-value](https://github.com/st3v3nmw/little-key-value) in Go by [@st3v3nmw](https://github.com/st3v3nmw)

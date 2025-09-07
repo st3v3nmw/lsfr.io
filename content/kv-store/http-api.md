@@ -71,12 +71,17 @@ Your API should handle concurrent requests safely.
 Consider [thread safety](https://en.wikipedia.org/wiki/Thread_safety) when implementing your in-memory store.
 {{% /hint %}}
 
-
 ## Storage
 
-A simple in-memory [map/dictionary](https://en.wikipedia.org/wiki/Associative_array) is sufficient for storage in this stage. You'll add persistence in the next stage.
+A simple in-memory [map/dictionary](https://en.wikipedia.org/wiki/Associative_array) is sufficient for storage in this stage.
+You'll add persistence in the next stage.
 
-### Keys
+### Data Model
+
+Keys and values are stored as simple strings. This keeps the data model straightforward so
+you can focus on building intuition in distributed systems, not implementing complex data types.
+
+#### Keys
 
 Keys must be URL-safe strings without spaces or forward slashes. Examples of valid keys:
 
@@ -84,7 +89,7 @@ Keys must be URL-safe strings without spaces or forward slashes. Examples of val
 - `user_123`
 - `special:key-with_symbols.123`
 
-### Values
+#### Values
 
 Values are stored as UTF-8 encoded text and can contain:
 
