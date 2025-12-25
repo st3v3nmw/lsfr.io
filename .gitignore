@@ -4,3 +4,4 @@ resources/_gen/
 
 # AI tooling
 .claude/
+.sourcerer/
