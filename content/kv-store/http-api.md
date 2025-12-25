@@ -77,8 +77,7 @@ You'll add persistence in the next stage.
 
 ### Data Model
 
-Keys and values are stored as simple strings. This keeps the data model straightforward so
-you can focus on building intuition in distributed systems, not implementing complex data types.
+Keys and values are stored as simple strings. This keeps the data model straightforward so you can focus on building intuition in distributed systems, not implementing complex data types.
 
 #### Keys
 

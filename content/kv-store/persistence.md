@@ -28,6 +28,7 @@ If no previous data exists, start with an empty store.
 ## Storage
 
 You can store the data however you choose; the implementation is up to you.
+
 Some approaches to consider:
 
 **Storage Strategy:**
