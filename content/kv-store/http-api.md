@@ -66,10 +66,9 @@ Unsupported HTTP methods on any endpoint should return:
 
 - 405 Method Not Allowed: Return "method not allowed\n"
 
-{{% hint warning %}}
-Your API should handle concurrent requests safely.
-Consider [thread safety](https://en.wikipedia.org/wiki/Thread_safety) when implementing your in-memory store.
-{{% /hint %}}
+> [!WARNING]
+> Your API should handle concurrent requests safely.
+> Consider [thread safety](https://en.wikipedia.org/wiki/Thread_safety) when implementing your in-memory store.
 
 ## Storage
 
