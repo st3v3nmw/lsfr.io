@@ -8,18 +8,19 @@ weight: 2
 In this stage, you'll add persistence to your key-value store.
 Data should survive clean shutdowns and be restored when the server restarts.
 
-## Clean Shutdown
+## Graceful Shutdown
 
 When your server receives a SIGTERM signal, it should:
 
-1. Save all key-value pairs to disk
-2. Exit gracefully
+1. Wait for in-flight requests to complete (within 5 seconds)
+2. Save all key-value pairs to disk
+3. Exit with status code `0`
 
 ## Startup Recovery
 
 When your server starts, it should:
 
-1. Check the data directory for existing data
+1. Check the working directory for existing data
 2. Load any previously saved key-value pairs
 3. Continue serving requests with the restored data
 
@@ -27,22 +28,30 @@ If no previous data exists, start with an empty store.
 
 ## Storage
 
-You can store the data however you choose; the implementation is up to you.
+Save your in-memory state to disk during shutdown and restore it on startup. Create your data files in the working directory (passed via `--working-dir`). The serialization format and file naming are up to you - JSON, binary, plain text, whatever.
 
-Some approaches to consider:
+This approach survives clean shutdowns but not crashes. If the process dies unexpectedly, you'll lose any data that wasn't saved. That's fine for this stage - you'll add crash recovery in the next stage.
 
-**Storage Strategy:**
+## Testing
 
-- Snapshot on shutdown: Save all data after receiving SIGTERM
-- Continuous persistence: Save changes as they happen
-
-**Data Structures:**
-
-- Simple formats: JSON & binary serialization, plain text files, etc
-- Tree-based: B-trees, Log-structured merge-trees (LSM trees), etc
-
-Your server must accept a `--data-dir` flag that specifies where to persist data:
+Your server will be started with the working directory where it should store data:
 
 ```console
-$ ./run.sh --port 8080 --data-dir /tmp/tmpzz5vkl5d
+$ ./run.sh --port 8080 --working-dir .lsfr/run-20251226-210357
+```
+
+You can test your implementation using the `lsfr` command:
+
+```console
+$ lsfr test
+Testing persistence: Data Survives SIGTERM
+
+✓ Store Initial Testing Data
+✓ Verify Data Survives Restart
+✓ Check Data Integrity After Multiple Restarts
+✓ Test Persistence When Under Load
+
+PASSED ✓
+
+Run 'lsfr next' to advance to the next stage.
 ```

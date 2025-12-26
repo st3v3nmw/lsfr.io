@@ -28,7 +28,7 @@ The tests verify your system works by running it and checking behavior, not impl
 
 ```bash
 $ lsfr test
-Running http-api: HTTP API with GET/PUT/DELETE Operations
+Testing http-api: HTTP API with GET/PUT/DELETE Operations
 
 ✓ PUT Basic Operations
 ✓ PUT Edge and Error Cases

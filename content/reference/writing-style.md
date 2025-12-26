@@ -13,7 +13,7 @@ State what the system needs to accomplish, not how to build it. Point to possibl
 
 ## Pedagogy
 
-Structure learning through progressive disclosure. Start each stage with the simplest version of a concept, then add complexity only after the foundation is solid. Make each stage build on previous work so the progression feels natural rather than arbitrary.
+Structure learning through progressive disclosure. Start each challenge with the simplest version of a problem, then add complexity only after the foundation is solid. Make each stage build on previous work so the progression feels natural rather than arbitrary.
 
 Introduce one major capability per stage: one testable system behavior that builds on previous work. Supporting concepts can appear as needed, but each stage should add one clear building block to the system.
 

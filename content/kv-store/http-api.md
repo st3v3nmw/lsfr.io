@@ -97,12 +97,19 @@ Values are stored as UTF-8 encoded text and can contain:
 
 ## Testing
 
-You can test your implementation using the `lsfr` command.
-Your program should accept a `--port` flag that `lsfr` will use to tell it what port to run on.
+Your server must accept `--port` and `--working-dir` flags:
+
+```console
+$ ./run.sh --port 8080 --working-dir .lsfr/run-20251226-210357
+```
+
+The `--working-dir` is where `lsfr` writes logs. Your server's output will be in `primary.log` inside that directory.
+
+You can test your implementation using the `lsfr` command:
 
 ```console
 $ lsfr test http-api
-Running http-api: HTTP API with GET/PUT/DELETE Operations
+Testing http-api: HTTP API with GET/PUT/DELETE Operations
 
 ✓ PUT Basic Operations
 ✓ PUT Edge and Error Cases
@@ -124,7 +131,7 @@ When tests fail, `lsfr` will show you exactly what went wrong:
 
 ```console
 $ lsfr test
-Running http-api: HTTP API with GET/PUT/DELETE Operations
+Testing http-api: HTTP API with GET/PUT/DELETE Operations
 
 ✓ PUT Basic Operations
 ✓ PUT Edge and Error Cases
