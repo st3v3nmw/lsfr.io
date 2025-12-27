@@ -55,3 +55,10 @@ PASSED ✓
 
 Run 'lsfr next' to advance to the next stage.
 ```
+
+The test will:
+
+1. Store data in your server
+2. Send SIGTERM to trigger graceful shutdown
+3. Restart your server
+4. Verify all data is still present

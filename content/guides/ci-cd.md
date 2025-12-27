@@ -9,7 +9,7 @@ Run `lsfr` tests automatically in GitHub Actions.
 
 ## GitHub Actions
 
-Add `.github/workflows/lsfr.yml` to your repository:
+Add `.github/workflows/lsfr.yaml` to your repository:
 
 ```yaml
 name: lsfr Tests

@@ -28,6 +28,9 @@ After appending an operation to the log, ensure it's physically written to disk 
 
 Without sync, the OS may buffer writes in memory and you'll lose data on crash.
 
+> [!WARNING]
+> Syncing on every operation is slow since you're forcing a disk write and blocking the response. This is the correct trade-off for durability, but it limits throughput. Production databases use techniques like batching to amortize the fsync cost across multiple operations.
+
 ## Recovery Procedure
 
 When your server starts:

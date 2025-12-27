@@ -36,7 +36,9 @@ Testing http-api: HTTP API with GET/PUT/DELETE Operations
 ✓ GET Edge and Error Cases
 ✓ DELETE Basic Operations
 ✓ DELETE Edge and Error Cases
-✓ Concurrent Operations
+✓ CLEAR Operations
+✓ Concurrent Operations - Different Keys
+✓ Concurrent Operations - Same Key
 ✓ Check Allowed HTTP Methods
 
 PASSED ✓

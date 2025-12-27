@@ -7,7 +7,7 @@ weight: 2
 
 ## Audience
 
-Write for capable peers: mid-level developers who can research concepts, make implementation choices, and work on complex problems.
+Write for capable peers: mid-level+ developers who can research concepts, make implementation choices, and work on complex problems.
 
 State what the system needs to accomplish, not how to build it. Point to possible approaches or considerations, but let readers make implementation choices.
 
@@ -35,7 +35,7 @@ Structure each stage with a brief introduction (one or two sentences on what the
 
 When defining API contracts, data formats, or expected behaviors, be exact. Include complete endpoint specifications with methods, parameters, responses, and literal error messages. Specify data constraints explicitly. The goal is removing ambiguity about _what_ to build without prescribing _how_ to build it.
 
-Use code blocks to show test invocations, command-line usage, and expected outputs - not implementation code or algorithms. Readers should see how to verify their work and what correct behavior looks like.
+Use code blocks to show test invocations, command-line usage, and expected outputs - not implementation code or algorithms. Readers should see how to verify their work and what correct behavior looks like. When test behavior isn't obvious from output alone, briefly explain what the test does, especially when it affects implementation constraints (which signals, timing requirements, error conditions to handle).
 
 Reserve callouts for critical non-obvious concerns. Don't use them for general information that belongs in body text.
 
