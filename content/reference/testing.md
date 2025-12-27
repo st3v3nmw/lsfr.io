@@ -3,6 +3,378 @@ title: Testing
 weight: 1
 ---
 
-# Testing
+# Testing Framework
 
-// TODO
+The lsfr testing framework (`attest`) provides a fluent API for writing black-box tests against programs. Tests validate external behavior without accessing implementation internals.
+
+## Quick Start
+
+A typical test suite:
+
+```go
+package kvstore
+
+import (
+    . "github.com/st3v3nmw/lsfr/internal/attest"
+)
+
+func HTTPAPI() *Suite {
+    return New().
+        // 0
+        Setup(func(do *Do) {
+            do.Start("primary")
+        }).
+
+        // 1
+        Test("PUT stores data", func(do *Do) {
+            do.HTTP("primary", "PUT", "/kv/key", "value").
+                Returns().Status(Is(200)).
+                Assert("Your server should accept PUT requests.\n" +
+                    "Ensure your HTTP handler processes PUT to /kv/{key}.")
+        }).
+
+        // 2
+        Test("GET retrieves data", func(do *Do) {
+            do.HTTP("primary", "GET", "/kv/key").
+                Returns().Status(Is(200)).Body(Is("value")).
+                Assert("Your server should return stored values.")
+        })
+}
+```
+
+Tests run sequentially. State persists between tests so data written in test 1 is available in test 2. First failure stops execution.
+
+## HTTP Assertions
+
+Make HTTP requests and validate responses:
+
+```go
+// Basic request
+do.HTTP("primary", "GET", "/kv/key").
+    Returns().Status(Is(200)).Body(Is("value")).
+    Assert("Your server should return stored values.")
+
+// With body
+do.HTTP("primary", "PUT", "/kv/key", "value").
+    Returns().Status(Is(200)).
+    Assert("Your server should accept PUT requests.")
+
+// With custom headers
+do.HTTP("primary", "POST", "/api", `{"key":"value"}`, H{"Content-Type": "application/json"}).
+    Returns().Status(Is(201)).
+    Assert(...)
+
+// Status only
+do.HTTP("primary", "DELETE", "/kv/key").
+    Returns().Status(Is(200)).
+    Assert("Your server should accept DELETE requests.")
+```
+
+## CLI Assertions
+
+Execute CLI commands and validate output:
+
+```go
+// Check exit code and output
+do.Exec("--help").
+    Returns().ExitCode(Is(0)).Output(Contains("Usage:")).
+    Assert("Your command should show usage information.")
+
+// Check exit code only
+do.Exec("invalid", "args").
+    Returns().ExitCode(Is(1)).
+    Assert("Your command should reject invalid arguments.")
+```
+
+## Matchers
+
+### Is(value)
+
+Exact equality:
+
+```go
+.Status(Is(200))
+.Body(Is("key not found\n"))
+.ExitCode(Is(0))
+```
+
+### Contains(substring)
+
+String contains:
+
+```go
+.Body(Contains("error"))
+.Output(Contains("Usage:"))
+```
+
+### Matches(pattern)
+
+Regex matching:
+
+```go
+.Body(Matches(`^[0-9]+$`))
+.Output(Matches(`version \d+\.\d+\.\d+`))
+```
+
+### OneOf(values...)
+
+Match any of several values:
+
+```go
+// Useful for concurrent operations where order is non-deterministic
+.Body(OneOf("value1", "value2", "value3"))
+```
+
+### Not(matcher)
+
+Negates another matcher:
+
+```go
+.Status(Not(Is(500)))
+.Body(Not(Contains("panic")))
+```
+
+## Timing
+
+### Eventually()
+
+Retry until condition becomes true or timeout (default 5s):
+
+```go
+// Wait for replica to sync
+do.HTTP("replica", "GET", "/kv/key").
+    Eventually().
+    Returns().Status(Is(200)).Body(Is("value")).
+    Assert("Replica should eventually receive replicated data.")
+
+// Custom timeout
+do.HTTP("replica", "GET", "/kv/key").
+    Eventually().Within(10 * time.Second).
+    Returns().Status(Is(200)).Body(Is("value")).
+    Assert("Replica should sync within 10 seconds.")
+```
+
+### Consistently()
+
+Verify condition stays true for duration (default 5s):
+
+```go
+// Verify value remains stable
+do.HTTP("primary", "GET", "/kv/key").
+    Consistently().
+    Returns().Status(Is(200)).Body(Is("value")).
+    Assert("Value should remain stable.")
+
+// Custom duration
+do.HTTP("primary", "GET", "/kv/key").
+    Consistently().For(2 * time.Second).
+    Returns().Status(Is(200)).Body(Is("value")).
+    Assert("Value should remain stable for 2 seconds.")
+```
+
+### Default (Immediate)
+
+Without `Eventually()` or `Consistently()`, checks execute once immediately:
+
+```go
+do.HTTP("primary", "GET", "/kv/key").
+    Returns().Status(Is(200)).
+    Assert("Your server should return the value immediately.")
+```
+
+## Service Management
+
+### Start(name, args...)
+
+Start a service with auto-assigned port:
+
+```go
+do.Start("primary")
+do.Start("replica", "--seed=123")
+```
+
+Port is auto-assigned by the OS. Services receive `--port` and `--working-dir` flags automatically. Each test run gets an isolated working directory like `run-20240115-143022`.
+
+### Stop(name)
+
+Graceful shutdown with SIGTERM:
+
+```go
+do.Stop("primary")
+```
+
+Sends SIGTERM and waits for graceful exit. If process doesn't exit within timeout, sends SIGKILL.
+
+### Kill(name)
+
+Immediate termination with SIGKILL:
+
+```go
+do.Kill("primary")
+```
+
+### Restart(name, sig...)
+
+Restart a service:
+
+```go
+// Graceful restart (SIGTERM)
+do.Restart("primary")
+
+// Crash simulation (SIGKILL)
+do.Restart("primary", syscall.SIGKILL)
+```
+
+The optional signal parameter controls how the process is stopped before restart. SIGKILL simulates crashes with no cleanup, SIGTERM allows graceful shutdown.
+
+## Concurrency
+
+### Concurrently(funcs...)
+
+Run operations in parallel:
+
+```go
+do.Concurrently(
+    func() {
+        do.HTTP("primary", "PUT", "/kv/key1", "value1").
+            Returns().Status(Is(200)).
+            Assert(...)
+    },
+    func() {
+        do.HTTP("primary", "PUT", "/kv/key2", "value2").
+            Returns().Status(Is(200)).
+            Assert(...)
+    },
+)
+
+// Verify both succeeded
+do.HTTP("primary", "GET", "/kv/key1").
+    Returns().Status(Is(200)).Body(Is("value1")).
+    Assert(...)
+do.HTTP("primary", "GET", "/kv/key2").
+    Returns().Status(Is(200)).Body(Is("value2")).
+    Assert(...)
+```
+
+Waits for all functions to complete. If any panic, the first panic is re-raised after all complete.
+
+## Writing Good Assertions
+
+Assertion messages appear when tests fail. They should help developers fix the problem.
+
+Good assertion messages describe expected behavior, provide concrete next steps, and reference relevant concepts:
+
+```go
+Assert("Your server should reject empty keys.\n" +
+    "Add validation to return 400 Bad Request for empty keys.")
+
+Assert("Your server should preserve data across crashes.\n" +
+    "Implement a Write-Ahead Log (WAL) that records operations before applying them.\n" +
+    "Ensure writes are durably stored before acknowledging to the client.")
+```
+
+Focus on requirements rather than implementation details. Say "Ensure writes are durably stored before acknowledging" instead of "You must call fsync".
+
+Avoid:
+
+- Generic messages: "Fix your code"
+- Vague messages: "This is wrong"
+- Past tense: "Your server accepted an empty key when it should reject it"
+- Unnecessary adverbs: "Your server should handle requests correctly"
+
+Example error output:
+
+```console
+PUT /kv/ "value"
+  Expected response: "key cannot be empty\n"
+  Actual response: ""
+
+  Your server should reject empty keys.
+  Add validation to return 400 Bad Request for empty keys.
+```
+
+## Creating a Challenge
+
+### Directory Structure
+
+```
+challenges/
+└── kvstore/
+    ├── init.go           # Challenge registration
+    ├── http_api.go       # Stage 1
+    ├── persistence.go    # Stage 2
+    └── crash_recovery.go # Stage 3
+```
+
+### Stage Structure
+
+Each stage is a function returning `*Suite`:
+
+```go
+package kvstore
+
+import (
+    . "github.com/st3v3nmw/lsfr/internal/attest"
+)
+
+func HTTPAPI() *Suite {
+    return New().
+        // 0
+        Setup(func(do *Do) {
+            do.Start("primary")
+        }).
+
+        // 1
+        Test("PUT Basic Operations", func(do *Do) {
+            do.HTTP("primary", "PUT", "/kv/key", "value").
+                Returns().Status(Is(200)).
+                Assert("Your server should accept PUT requests.")
+        }).
+
+        // 2
+        Test("GET Basic Operations", func(do *Do) {
+            do.HTTP("primary", "GET", "/kv/key").
+                Returns().Status(Is(200)).Body(Is("value")).
+                Assert("Your server should return stored values.")
+        })
+}
+```
+
+Import `attest` with `.` for cleaner syntax. Number tests with comments (0, 1, 2...) to visually separate tests so that they're not crowded.
+
+### Challenge Registration
+
+Create `init.go`:
+
+```go
+package kvstore
+
+import "github.com/st3v3nmw/lsfr/internal/registry"
+
+func init() {
+    challenge := &registry.Challenge{
+        Name: "Distributed Key-Value Store",
+        Summary: `Build a distributed key-value store from scratch.
+You'll start with a simple HTTP API and progressively add persistence,
+crash recovery, clustering, replication, and consensus.`,
+    }
+
+    challenge.AddStage("http-api", "HTTP API with GET/PUT/DELETE Operations", HTTPAPI)
+    challenge.AddStage("persistence", "Data Survives SIGTERM", Persistence)
+    challenge.AddStage("crash-recovery", "Crash Recovery with Write-Ahead Logging", CrashRecovery)
+
+    registry.RegisterChallenge("kv-store", challenge)
+}
+```
+
+### Auto-Discovery
+
+Import your challenge in `challenges/challenges.go`:
+
+```go
+package challenges
+
+import (
+    _ "github.com/st3v3nmw/lsfr/challenges/kvstore"
+)
+```

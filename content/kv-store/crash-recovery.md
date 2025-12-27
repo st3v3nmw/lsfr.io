@@ -63,9 +63,6 @@ After creating a snapshot:
 
 On recovery, load the latest snapshot and replay only the operations logged after that snapshot.
 
-> [!WARNING]
-> Don't delete the old snapshot until the new one is safely on disk. If you crash during checkpointing, you need the old snapshot and log to be intact.
-
 ## Storage Layout
 
 You now have two types of files:
@@ -87,13 +84,12 @@ Your server will be tested with unexpected crashes:
 
 ```console
 $ lsfr test crash-recovery
-Testing crash-recovery: Write-Ahead Logging and Recovery
+Testing crash-recovery: Crash Recovery with Write-Ahead Logging
 
 ✓ Basic WAL Durability
-✓ Recovery After Crash
 ✓ Multiple Crash Recovery Cycles
-✓ Checkpoint and Replay
-✓ Corrupted Log Handling
+✓ Rapid Write Burst Before Crash
+✓ Large Dataset With Concurrent Writes
 
 PASSED ✓
 
@@ -102,29 +98,7 @@ Run 'lsfr next' to advance to the next stage.
 
 The test will:
 
-1. Send PUT/DELETE/CLEAR operations to your server
+1. Store data in your server
 2. Kill the server process (SIGKILL) without warning
 3. Restart your server
 4. Verify all data that was acknowledged before the crash is still present
-
-### Debugging
-
-When tests fail, `lsfr` shows what data was lost:
-
-```console
-$ lsfr test crash-recovery
-Testing crash-recovery: Write-Ahead Logging and Recovery
-
-✓ Basic WAL Durability
-✗ Recovery After Crash
-
-Before crash: PUT /kv/user_123 → "alice"
-After crash: GET /kv/user_123 → 404 Not Found
-
-Your server acknowledged the PUT but lost the data after crashing.
-Make sure you're syncing the WAL to disk (fsync) before responding to writes.
-
-FAILED ✗
-
-Read the guide: lsfr.io/kv-store/crash-recovery
-```

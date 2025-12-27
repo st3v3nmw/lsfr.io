@@ -46,8 +46,7 @@ You can test your implementation using the `lsfr` command:
 $ lsfr test
 Testing persistence: Data Survives SIGTERM
 
-✓ Store Initial Testing Data
-✓ Verify Data Survives Restart
+✓ Verify Data Survives Graceful Restart
 ✓ Check Data Integrity After Multiple Restarts
 ✓ Test Persistence When Under Load
 
