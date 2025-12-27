@@ -84,12 +84,12 @@ Your server will be tested with unexpected crashes:
 
 ```console
 $ lsfr test crash-recovery
-Testing crash-recovery: Crash Recovery with Write-Ahead Logging
+Testing crash-recovery: Data Survives SIGKILL
 
 ✓ Basic WAL Durability
 ✓ Multiple Crash Recovery Cycles
 ✓ Rapid Write Burst Before Crash
-✓ Large Dataset With Concurrent Writes
+✓ Test Recovery When Under Concurrent Load
 
 PASSED ✓
 

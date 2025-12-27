@@ -48,7 +48,7 @@ Testing persistence: Data Survives SIGTERM
 
 ✓ Verify Data Survives Graceful Restart
 ✓ Check Data Integrity After Multiple Restarts
-✓ Test Persistence When Under Load
+✓ Test Persistence When Under Concurrent Load
 
 PASSED ✓
 
