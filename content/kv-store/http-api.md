@@ -103,7 +103,7 @@ Your server must accept `--port` and `--working-dir` flags:
 $ ./run.sh --port 8080 --working-dir .lsfr/run-20251226-210357
 ```
 
-`--working-dir` is your server's working directory. Any files you create should go here, and your server's logs will be in `primary.log`.
+`--working-dir` is your server's working directory. Any files you create should go here, and your server's logs will be in `node.log`.
 
 You can test your implementation using the `lsfr` command:
 
@@ -152,4 +152,4 @@ FAILED ✗
 Read the guide: lsfr.io/kv-store/http-api
 ```
 
-You can also add your own logging to help debug. Your server's output (stdout/stderr) is captured in `primary.log` inside the working directory.
+You can also add your own logging to help debug. Your server's output (stdout/stderr) is captured in `node.log` inside the working directory.

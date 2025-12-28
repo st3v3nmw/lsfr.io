@@ -22,12 +22,12 @@ func HTTPAPI() *Suite {
     return New().
         // 0
         Setup(func(do *Do) {
-            do.Start("primary")
+            do.Start("node")
         }).
 
         // 1
         Test("PUT stores data", func(do *Do) {
-            do.HTTP("primary", "PUT", "/kv/key", "value").
+            do.HTTP("node", "PUT", "/kv/key", "value").
                 Returns().Status(Is(200)).
                 Assert("Your server should accept PUT requests.\n" +
                     "Ensure your HTTP handler processes PUT to /kv/{key}.")
@@ -35,7 +35,7 @@ func HTTPAPI() *Suite {
 
         // 2
         Test("GET retrieves data", func(do *Do) {
-            do.HTTP("primary", "GET", "/kv/key").
+            do.HTTP("node", "GET", "/kv/key").
                 Returns().Status(Is(200)).Body(Is("value")).
                 Assert("Your server should return stored values.")
         })
@@ -50,22 +50,22 @@ Make HTTP requests and validate responses:
 
 ```go
 // Basic request
-do.HTTP("primary", "GET", "/kv/key").
+do.HTTP("node", "GET", "/kv/key").
     Returns().Status(Is(200)).Body(Is("value")).
     Assert("Your server should return stored values.")
 
 // With body
-do.HTTP("primary", "PUT", "/kv/key", "value").
+do.HTTP("node", "PUT", "/kv/key", "value").
     Returns().Status(Is(200)).
     Assert("Your server should accept PUT requests.")
 
 // With custom headers
-do.HTTP("primary", "POST", "/api", `{"key":"value"}`, H{"Content-Type": "application/json"}).
+do.HTTP("node", "POST", "/api", `{"key":"value"}`, H{"Content-Type": "application/json"}).
     Returns().Status(Is(201)).
     Assert(...)
 
 // Status only
-do.HTTP("primary", "DELETE", "/kv/key").
+do.HTTP("node", "DELETE", "/kv/key").
     Returns().Status(Is(200)).
     Assert("Your server should accept DELETE requests.")
 ```
@@ -160,13 +160,13 @@ Verify condition stays true for duration (default 5s):
 
 ```go
 // Verify value remains stable
-do.HTTP("primary", "GET", "/kv/key").
+do.HTTP("node", "GET", "/kv/key").
     Consistently().
     Returns().Status(Is(200)).Body(Is("value")).
     Assert("Value should remain stable.")
 
 // Custom duration
-do.HTTP("primary", "GET", "/kv/key").
+do.HTTP("node", "GET", "/kv/key").
     Consistently().For(2 * time.Second).
     Returns().Status(Is(200)).Body(Is("value")).
     Assert("Value should remain stable for 2 seconds.")
@@ -177,7 +177,7 @@ do.HTTP("primary", "GET", "/kv/key").
 Without `Eventually()` or `Consistently()`, checks execute once immediately:
 
 ```go
-do.HTTP("primary", "GET", "/kv/key").
+do.HTTP("node", "GET", "/kv/key").
     Returns().Status(Is(200)).
     Assert("Your server should return the value immediately.")
 ```
@@ -189,7 +189,7 @@ do.HTTP("primary", "GET", "/kv/key").
 Start a service with auto-assigned port:
 
 ```go
-do.Start("primary")
+do.Start("node")
 do.Start("replica", "--seed=123")
 ```
 
@@ -200,7 +200,7 @@ Port is auto-assigned by the OS. Services receive `--port` and `--working-dir` f
 Graceful shutdown with SIGTERM:
 
 ```go
-do.Stop("primary")
+do.Stop("node")
 ```
 
 Sends SIGTERM and waits for graceful exit. If process doesn't exit within timeout, sends SIGKILL.
@@ -210,7 +210,7 @@ Sends SIGTERM and waits for graceful exit. If process doesn't exit within timeou
 Immediate termination with SIGKILL:
 
 ```go
-do.Kill("primary")
+do.Kill("node")
 ```
 
 ### Restart(name, sig...)
@@ -219,10 +219,10 @@ Restart a service:
 
 ```go
 // Graceful restart (SIGTERM)
-do.Restart("primary")
+do.Restart("node")
 
 // Crash simulation (SIGKILL)
-do.Restart("primary", syscall.SIGKILL)
+do.Restart("node", syscall.SIGKILL)
 ```
 
 The optional signal parameter controls how the process is stopped before restart. SIGKILL simulates crashes with no cleanup, SIGTERM allows graceful shutdown.
@@ -236,22 +236,22 @@ Run operations in parallel:
 ```go
 do.Concurrently(
     func() {
-        do.HTTP("primary", "PUT", "/kv/key1", "value1").
+        do.HTTP("node", "PUT", "/kv/key1", "value1").
             Returns().Status(Is(200)).
             Assert(...)
     },
     func() {
-        do.HTTP("primary", "PUT", "/kv/key2", "value2").
+        do.HTTP("node", "PUT", "/kv/key2", "value2").
             Returns().Status(Is(200)).
             Assert(...)
     },
 )
 
 // Verify both succeeded
-do.HTTP("primary", "GET", "/kv/key1").
+do.HTTP("node", "GET", "/kv/key1").
     Returns().Status(Is(200)).Body(Is("value1")).
     Assert(...)
-do.HTTP("primary", "GET", "/kv/key2").
+do.HTTP("node", "GET", "/kv/key2").
     Returns().Status(Is(200)).Body(Is("value2")).
     Assert(...)
 ```
@@ -321,19 +321,19 @@ func HTTPAPI() *Suite {
     return New().
         // 0
         Setup(func(do *Do) {
-            do.Start("primary")
+            do.Start("node")
         }).
 
         // 1
         Test("PUT Basic Operations", func(do *Do) {
-            do.HTTP("primary", "PUT", "/kv/key", "value").
+            do.HTTP("node", "PUT", "/kv/key", "value").
                 Returns().Status(Is(200)).
                 Assert("Your server should accept PUT requests.")
         }).
 
         // 2
         Test("GET Basic Operations", func(do *Do) {
-            do.HTTP("primary", "GET", "/kv/key").
+            do.HTTP("node", "GET", "/kv/key").
                 Returns().Status(Is(200)).Body(Is("value")).
                 Assert("Your server should return stored values.")
         })
