@@ -8,10 +8,11 @@ bookCollapseSection: true
 
 Welcome to the distributed key-value store challenge!
 
-In this challenge, you'll build a distributed key-value store from scratch.
-You'll start with a simple HTTP API and progressively add persistence, crash recovery, clustering, replication, and consensus mechanisms.
+In this challenge, you'll build a distributed key-value store from scratch using the Raft consensus algorithm.
 
-By the end, you'll have built a system that can handle node failures, network partitions, and scale across multiple nodes while maintaining data consistency.
+You'll start with a single-node system that handles persistence and crash recovery, then implement Raft's leader election, log replication, and fault tolerance mechanisms.
+
+By the end, you'll have built a production-grade distributed system that maintains strong consistency guarantees even during node failures and network partitions.
 
 ## Stages
 
@@ -27,25 +28,25 @@ Add persistence to your store. Data should survive clean shutdowns (SIGTERM).
 
 Ensure data consistency after crashes. Data should survive unclean shutdowns (SIGKILL).
 
-4. [Clustering](/kv-store/clustering)
+4. [Leader Election](/kv-store/leader-election)
 
-Discover and connect to other nodes in a leader-follower arrangement.
+Form a cluster and elect a leader using the Raft consensus algorithm.
 
-5. [Read Replicas](/kv-store/read-replicas)
+5. [Log Replication](/kv-store/log-replication)
 
-Add read replicas that follow the leader. Handle eventual consistency across the cluster.
+Replicate operations from the leader to followers with strong consistency guarantees.
 
-6. [Fault Tolerance](/kv-store/fault-tolerance)
+6. [Membership Changes](/kv-store/membership-changes)
 
-Handle leader failures and network partitions while maintaining cluster consistency.
+Dynamically add and remove nodes from the cluster without downtime.
 
-7. [Strong Consistency](/kv-store/strong-consistency)
+7. [Fault Tolerance](/kv-store/fault-tolerance)
 
-Implement strong consistency guarantees for read and write operations.
+Handle node failures and network partitions while maintaining safety guarantees.
 
-8. [Sharding](/kv-store/sharding)
+8. [Log Compaction](/kv-store/log-compaction)
 
-Distribute data across multiple shards for horizontal scaling.
+Prevent unbounded log growth through snapshots and log truncation.
 
 ## Getting Started
 
@@ -57,6 +58,10 @@ If you haven't already, read [this overview](/how-lsfr-works) on how _lsfr_ work
 
 - [Designing Data-Intensive Applications](https://dataintensive.net/) by Martin Kleppmann
 - [Database Internals](https://www.databass.dev/) by Alex Petrov
+
+### Papers
+
+- [Raft Paper](https://raft.github.io/raft.pdf) by Diego Ongaro & John Ousterhout
 
 ### Videos
 

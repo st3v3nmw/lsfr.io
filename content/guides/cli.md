@@ -160,17 +160,22 @@ $ lsfr status
 Distributed Key-Value Store
 
 In this challenge, you'll build a distributed key-value store from scratch.
-You'll start with a simple HTTP API and progressively add persistence, crash recovery,
-clustering, replication, and consensus mechanisms.
+You'll start with a single-node system that handles persistence and crash recovery,
+then implement Raft's leader election, log replication, and fault tolerance mechanisms.
 
 Progress:
-✓ http-api          - HTTP API with GET/PUT/DELETE Operations
-→ persistence       - Data Survives SIGTERM
-  crash-recovery    - Data Survives SIGKILL
+✓ http-api           - HTTP API with GET/PUT/DELETE Operations
+✓ persistence        - Data Survives SIGTERM
+✓ crash-recovery     - Data Survives SIGKILL
+→ leader-election    - Raft Leader Election
+  log-replication    - Raft Log Replication
+  membership-changes - Dynamic Cluster Membership
+  fault-tolerance    - Node Failures and Network Partitions
+  log-compaction     - Snapshots and Log Truncation
 
-Read the guide: lsfr.io/kv-store/persistence
+Read the guide: lsfr.io/kv-store/leader-election
 
-Implement persistence, then run 'lsfr test'.
+Implement leader-election, then run 'lsfr test'.
 ```
 
 ### lsfr list
