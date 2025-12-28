@@ -1,8 +1,40 @@
 # lsfr
 
-_lsfr_ is a platform for learning how to build complex systems from scratch.
+lsfr is a platform for learning how to build complex systems from scratch through
+incremental, stage-based challenges. Developers implement real distributed databases,
+compilers, message queues, etc in any language, verified by behavioral tests rather
+than implementation checks.
 
-It helps developers tackle challenges like distributed databases, compilers,
-and message queues by breaking them down into manageable stages with progressive testing.
+## Main Pages
 
-// TODO
+- Home: https://lsfr.io/
+  Project-based learning approach and getting started
+
+- How lsfr Works: https://lsfr.io/how-lsfr-works/
+  CLI tool, testing system, and workflow explanation
+
+- About: https://lsfr.io/about/
+  Background and motivation
+
+## Guides
+
+- CLI: https://lsfr.io/guides/cli/
+  Command reference and usage examples
+
+- CI/CD: https://lsfr.io/guides/ci-cd/
+  Integrating lsfr tests into continuous integration pipelines
+
+## Challenges
+
+### Distributed Key-Value Store
+
+https://lsfr.io/kv-store/
+
+A challenge building a distributed key-value store with Raft consensus.
+Covers HTTP APIs, persistence, replication, leader election, crash recovery,
+log compaction, membership changes, and fault tolerance.
+
+## GitHub Repositories
+
+- CLI Tool: https://github.com/st3v3nmw/lsfr
+- Documentation/Website: https://github.com/st3v3nmw/lsfr.io
