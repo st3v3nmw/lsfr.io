@@ -21,7 +21,7 @@ Build a basic in-memory key-value store with GET/PUT/DELETE operations over HTTP
 
 2. [Persistence](/kv-store/persistence)
 
-Add durability to your store. Data should survive clean shutdowns (SIGTERM).
+Add persistence to your store. Data should survive clean shutdowns (SIGTERM).
 
 3. [Crash Recovery](/kv-store/crash-recovery)
 
