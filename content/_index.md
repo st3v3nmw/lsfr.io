@@ -74,4 +74,4 @@ Start with: lsfr new <challenge-name>
 
 ## Ready to Build?
 
-[Start with the distributed key-value store challenge](/kv-store). Or [learn how lsfr works](/how-lsfr-works) if you want to understand the tooling first.
+[Start with the distributed key-value store challenge](/kv-store/). Or [learn how lsfr works](/how-lsfr-works/) if you want to understand the tooling first.

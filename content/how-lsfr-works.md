@@ -13,7 +13,7 @@ You write real code that actually works. Tests verify your implementation handle
 
 ## Challenges
 
-Each challenge breaks down a complex system into manageable stages that can be built incrementally. For instance, the [distributed key-value store challenge](/kv-store) starts with a simple in-memory store with a HTTP API and by the end, you have a sharded distributed key-value store.
+Each challenge breaks down a complex system into manageable stages that can be built incrementally. For instance, the [distributed key-value store challenge](/kv-store/) starts with a simple in-memory store with a HTTP API and by the end, you have a sharded distributed key-value store.
 
 Each stage comes with tests that simulate real-world scenarios like network failures and crash recovery. The tests verify your system's behavior, not implementation details, so you're free to choose your own data structures, algorithms, and approaches. These are essentially end-to-end tests that check if your system actually works.
 
@@ -27,7 +27,7 @@ See [this guide](/guides/cli/#installation) on how to install _lsfr_ on your sys
 
 ## Pick a Challenge
 
-Start with the [distributed key-value store challenge](/kv-store); it's a great introduction to distributed systems concepts. Check the challenge's page for details on the first stage.
+Start with the [distributed key-value store challenge](/kv-store/); it's a great introduction to distributed systems concepts. Check the challenge's page for details on the first stage.
 
 ### Scaffolding
 

@@ -14,41 +14,41 @@ By the end, you'll have built a production-grade distributed system that maintai
 
 ## Stages
 
-1. [HTTP API](/kv-store/http-api)
+1. [HTTP API](/kv-store/http-api/)
 
 Build a basic in-memory key-value store with GET/PUT/DELETE operations over HTTP.
 
-2. [Persistence](/kv-store/persistence)
+2. [Persistence](/kv-store/persistence/)
 
 Add persistence to your store. Data should survive clean shutdowns (SIGTERM).
 
-3. [Crash Recovery](/kv-store/crash-recovery)
+3. [Crash Recovery](/kv-store/crash-recovery/)
 
 Ensure data consistency after crashes. Data should survive unclean shutdowns (SIGKILL).
 
-4. [Leader Election](/kv-store/leader-election)
+4. [Leader Election](/kv-store/leader-election/)
 
 Form a cluster and elect a leader using the Raft consensus algorithm.
 
-5. [Log Replication](/kv-store/log-replication)
+5. [Log Replication](/kv-store/log-replication/)
 
 Replicate operations from the leader to followers with strong consistency guarantees.
 
-6. [Membership Changes](/kv-store/membership-changes)
+6. [Membership Changes](/kv-store/membership-changes/)
 
 Dynamically add and remove nodes from the cluster without downtime.
 
-7. [Fault Tolerance](/kv-store/fault-tolerance)
+7. [Fault Tolerance](/kv-store/fault-tolerance/)
 
 Handle node failures and network partitions while maintaining safety guarantees.
 
-8. [Log Compaction](/kv-store/log-compaction)
+8. [Log Compaction](/kv-store/log-compaction/)
 
 Prevent unbounded log growth through snapshots and log truncation.
 
 ## Getting Started
 
-If you haven't already, read [this overview](/how-lsfr-works) on how _lsfr_ works and then start with [stage 1 (HTTP API)](/kv-store/http-api).
+If you haven't already, read [this overview](/how-lsfr-works/) on how _lsfr_ works and then start with [stage 1 (HTTP API)](/kv-store/http-api/).
 
 ## Resources
 
