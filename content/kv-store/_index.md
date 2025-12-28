@@ -8,9 +8,7 @@ bookCollapseSection: true
 
 Welcome to the distributed key-value store challenge!
 
-In this challenge, you'll build a distributed key-value store from scratch using the Raft consensus algorithm.
-
-You'll start with a single-node system that handles persistence and crash recovery, then implement Raft's leader election, log replication, and fault tolerance mechanisms.
+In this challenge, you'll build a distributed key-value store from scratch. You'll start with a single-node system that handles persistence and crash recovery, then implement Raft's leader election, log replication, and fault tolerance mechanisms.
 
 By the end, you'll have built a production-grade distributed system that maintains strong consistency guarantees even during node failures and network partitions.
 

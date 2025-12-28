@@ -42,6 +42,13 @@ $ lsfr next            # Advance to next stage
 
 Edit `run.sh` to launch your implementation, then run `lsfr test` to get feedback.
 
+> [!NOTE]
+> Commands support short aliases for faster typing:
+> - `lsfr n` → `lsfr new`
+> - `lsfr t` → `lsfr test`
+> - `lsfr s` → `lsfr status`
+> - `lsfr l` or `lsfr ls` → `lsfr list`
+
 ## Basic Workflow
 
 ### 1. Start a Challenge
