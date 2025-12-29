@@ -91,7 +91,7 @@ do.Exec("invalid", "args").T().
 
 ## Matchers
 
-### Is(value)
+### `Is(value)`
 
 Exact equality:
 
@@ -101,7 +101,18 @@ Exact equality:
 .ExitCode(Is(0))
 ```
 
-### Contains(substring)
+### `IsNull[T]()`
+
+Checks if a value is null:
+
+```go
+// Check for null JSON field
+.JSON("leader", IsNull[string]())
+```
+
+Requires a type parameter to specify the expected field type.
+
+### `Contains(substring)`
 
 String contains:
 
@@ -110,7 +121,7 @@ String contains:
 .Output(Contains("Usage:"))
 ```
 
-### Matches(pattern)
+### `Matches(pattern)`
 
 Regex matching:
 
@@ -119,7 +130,7 @@ Regex matching:
 .Output(Matches(`version \d+\.\d+\.\d+`))
 ```
 
-### OneOf(values...)
+### `OneOf(values...)`
 
 Match any of several values:
 
@@ -128,7 +139,7 @@ Match any of several values:
 .Body(OneOf("value1", "value2", "value3"))
 ```
 
-### Not(matcher)
+### `Not(matcher)`
 
 Negates another matcher:
 
@@ -137,60 +148,43 @@ Negates another matcher:
 .Body(Not(Contains("panic")))
 ```
 
+### `JSON(path, matchers...)`
+
+Extract and validate JSON fields:
+
+```go
+// Simple field
+.JSON("role", Is("follower"))
+.JSON("term", Is("1"))
+
+// Nested path using dot notation
+.JSON("entries.0.term", Is("1"))
+.JSON("entries.1.index", Is("1"))
+
+// Check for null
+.JSON("leader", IsNull[string]())
+
+// Multiple matchers on same field
+.JSON("role", Is("leader"), Not(Is("follower")), Not(Is("candidate")))
+```
+
 ### Multiple Matchers
 
 Chain multiple matchers for the same field:
 
 ```go
 // Multiple status checks
-do.HTTP("node", "GET", "/").T().
-    Status(Is(200), Not(Is(404)), Not(Is(500))).
-    Assert("Should return 200 OK")
+.Status(Is(200), Not(Is(404)), Not(Is(500)))
 
 // Multiple body checks
-do.HTTP("node", "GET", "/").T().
-    Status(Is(200)).
-    Body(Contains("Hello"), Contains("World"), Not(Contains("Goodbye"))).
-    Assert("Should contain Hello and World but not Goodbye")
+.Body(Contains("Hello"), Contains("World"), Not(Contains("Goodbye")))
 ```
 
 All matchers for a field must pass. If any matcher fails, the assertion fails.
 
-### JSON(path, matchers...)
-
-Extract and validate JSON fields:
-
-```go
-// Simple field
-do.HTTP("node", "GET", "/cluster/info").T().
-    Status(Is(200)).
-    JSON("role", Is("follower")).
-    JSON("term", Is("1")).
-    Assert("Should return cluster info")
-
-// Nested path using dot notation
-do.HTTP("node", "GET", "/log").T().
-    Status(Is(200)).
-    JSON("entries.0.term", Is("1")).
-    JSON("entries.1.index", Is("1")).
-    Assert("Should return log entries")
-
-// Check for null
-do.HTTP("node", "GET", "/cluster/info").T().
-    Status(Is(200)).
-    JSON("leader", IsNull[string]()).
-    Assert("Leader should be null when no leader elected")
-
-// Multiple matchers on same field
-do.HTTP("node", "GET", "/cluster/info").T().
-    Status(Is(200)).
-    JSON("role", Is("leader"), Not(Is("follower")), Not(Is("candidate"))).
-    Assert("Node should be leader")
-```
-
 ## Timing
 
-### Eventually()
+### `Eventually()`
 
 Retry until condition becomes true or timeout (default 5s):
 
@@ -210,7 +204,7 @@ do.HTTP("replica", "GET", "/kv/key").
     Assert("Replica should sync within 10 seconds.")
 ```
 
-### Consistently()
+### `Consistently()`
 
 Verify condition stays true for duration (default 5s):
 
@@ -242,7 +236,7 @@ do.HTTP("node", "GET", "/kv/key").T().
 
 ## Service Management
 
-### Start(name, args...)
+### `Start(name, args...)`
 
 Start a service with auto-assigned port:
 
@@ -253,7 +247,7 @@ do.Start("replica", "--seed=123")
 
 Port is auto-assigned by the OS. Services receive `--port` and `--working-dir` flags automatically. Each test run gets an isolated working directory like `run-20240115-143022`.
 
-### Stop(name)
+### `Stop(name)`
 
 Graceful shutdown with SIGTERM:
 
@@ -263,7 +257,7 @@ do.Stop("node")
 
 Sends SIGTERM and waits for graceful exit. If process doesn't exit within timeout, sends SIGKILL.
 
-### Kill(name)
+### `Kill(name)`
 
 Immediate termination with SIGKILL:
 
@@ -271,7 +265,7 @@ Immediate termination with SIGKILL:
 do.Kill("node")
 ```
 
-### Restart(name, sig...)
+### `Restart(name, sig...)`
 
 Restart a service:
 
@@ -287,7 +281,7 @@ The optional signal parameter controls how the process is stopped before restart
 
 ## Concurrency
 
-### Concurrently(funcs...)
+### `Concurrently(funcs...)`
 
 Run operations in parallel:
 
