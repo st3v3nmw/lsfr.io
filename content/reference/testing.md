@@ -70,6 +70,24 @@ do.HTTP("node", "POST", "/api", `{"key":"value"}`, H{"Content-Type": "applicatio
 do.HTTP("node", "DELETE", "/kv/key").T().
     Status(Is(200)).
     Assert("Your server should accept DELETE requests.")
+
+// JSON fields
+do.HTTP("node", "GET", "/cluster/info").T().
+    Status(Is(200)).
+    JSON("role", Is("follower")).
+    JSON("term", Is("1")).
+    Assert("Should return cluster info")
+
+do.HTTP("node", "GET", "/log").T().
+    Status(Is(200)).
+    JSON("entries.0.term", Is("1")).
+    JSON("entries.1.index", Is("1")).
+    Assert("Should return log entries")
+
+do.HTTP("node", "GET", "/cluster/info").T().
+    Status(Is(200)).
+    JSON("leader", IsNull[string]()).
+    Assert("Leader should be null when no leader elected")
 ```
 
 ## CLI Assertions
@@ -148,26 +166,6 @@ Negates another matcher:
 .Body(Not(Contains("panic")))
 ```
 
-### `JSON(path, matchers...)`
-
-Extract and validate JSON fields:
-
-```go
-// Simple field
-.JSON("role", Is("follower"))
-.JSON("term", Is("1"))
-
-// Nested path using dot notation
-.JSON("entries.0.term", Is("1"))
-.JSON("entries.1.index", Is("1"))
-
-// Check for null
-.JSON("leader", IsNull[string]())
-
-// Multiple matchers on same field
-.JSON("role", Is("leader"), Not(Is("follower")), Not(Is("candidate")))
-```
-
 ### Multiple Matchers
 
 Chain multiple matchers for the same field:
@@ -178,6 +176,9 @@ Chain multiple matchers for the same field:
 
 // Multiple body checks
 .Body(Contains("Hello"), Contains("World"), Not(Contains("Goodbye")))
+
+// Multiple JSON field checks
+JSON("role", Is("leader"), Not(Is("follower")), Not(Is("candidate")))
 ```
 
 All matchers for a field must pass. If any matcher fails, the assertion fails.
