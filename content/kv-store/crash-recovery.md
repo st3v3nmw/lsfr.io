@@ -41,14 +41,6 @@ When your server starts:
 
 If no snapshot exists, replay the entire log from the beginning.
 
-### Handling Corrupted Logs
-
-The log file may contain partial writes at the end if the server crashed mid-write. Your replay logic should handle this gracefully:
-
-- Skip incomplete/corrupted entries at the end of the log
-- Process all valid entries before the corruption
-- Continue serving requests with the recovered data
-
 ## Checkpointing
 
 As your log grows, replaying from the beginning becomes slow. Periodically create snapshots of your in-memory state and truncate the log.

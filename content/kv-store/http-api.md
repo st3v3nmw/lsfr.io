@@ -81,7 +81,7 @@ Keys and values are stored as simple strings. This keeps the data model straight
 
 #### Keys
 
-Keys must be URL-safe strings without spaces or forward slashes. Examples of valid keys:
+Keys must contain only alphanumeric plus `:`, `_`, `.`, & `-` characters. Examples of valid keys:
 
 - `country:capital`
 - `user_123`
