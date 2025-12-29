@@ -109,7 +109,7 @@ You can test your implementation using the `lsfr` command:
 
 ```console
 $ lsfr test http-api
-Testing http-api: HTTP API with GET/PUT/DELETE Operations
+Testing http-api: Store and Retrieve Data
 
 ✓ PUT Basic Operations
 ✓ PUT Edge and Error Cases
@@ -133,7 +133,7 @@ When tests fail, `lsfr` will show you exactly what went wrong:
 
 ```console
 $ lsfr test
-Testing http-api: HTTP API with GET/PUT/DELETE Operations
+Testing http-api: Store and Retrieve Data
 
 ✓ PUT Basic Operations
 ✓ PUT Edge and Error Cases

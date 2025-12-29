@@ -359,9 +359,10 @@ You'll start with a simple HTTP API and progressively add persistence,
 crash recovery, clustering, replication, and consensus.`,
     }
 
-    challenge.AddStage("http-api", "HTTP API with GET/PUT/DELETE Operations", HTTPAPI)
+    challenge.AddStage("http-api", "Store and Retrieve Data", HTTPAPI)
     challenge.AddStage("persistence", "Data Survives SIGTERM", Persistence)
-    challenge.AddStage("crash-recovery", "Crash Recovery with Write-Ahead Logging", CrashRecovery)
+    challenge.AddStage("crash-recovery", "Data Survives SIGKILL", CrashRecovery)
+    challenge.AddStage("leader-election", "Cluster Elects and Maintains Leader", LeaderElection)
 
     registry.RegisterChallenge("kv-store", challenge)
 }

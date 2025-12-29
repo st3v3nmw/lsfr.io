@@ -171,14 +171,14 @@ You'll start with a single-node system that handles persistence and crash recove
 then implement Raft's leader election, log replication, and fault tolerance mechanisms.
 
 Progress:
-✓ http-api           - HTTP API with GET/PUT/DELETE Operations
+✓ http-api           - Store and Retrieve Data
 ✓ persistence        - Data Survives SIGTERM
 ✓ crash-recovery     - Data Survives SIGKILL
-→ leader-election    - Raft Leader Election
-  log-replication    - Raft Log Replication
-  membership-changes - Dynamic Cluster Membership
-  fault-tolerance    - Node Failures and Network Partitions
-  log-compaction     - Snapshots and Log Truncation
+→ leader-election    - Cluster Elects and Maintains Leader
+  log-replication    - Data Replicates to All Nodes
+  membership-changes - Add and Remove Nodes Dynamically
+  fault-tolerance    - Cluster Survives Failures and Partitions
+  log-compaction     - System Manages Log Growth
 
 Read the guide: lsfr.io/kv-store/leader-election
 

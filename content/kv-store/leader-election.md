@@ -36,7 +36,7 @@ Leaders send `AppendEntries` RPC heartbeats every **100ms** to maintain authorit
 If a follower doesn't receive heartbeats within the election timeout, it starts a new election.
 
 > [!NOTE]
-> These timing values are more conservative than the Raft paper's suggested 150-300ms election timeout. The larger ratio (5-10x) between heartbeat interval and election timeout accounts for varying execution speeds across different implementation languages and prevents spurious elections caused by GC pauses or interpreter overhead.
+> These timing values are more conservative than the Raft paper's suggested 150-300ms election timeout. The larger ratio (5-10x) between heartbeat interval and election timeout accounts for varying execution speeds across different implementation languages and prevents spurious elections caused by garbage collection pauses or interpreter overhead.
 
 ## Client Requests
 
@@ -179,7 +179,7 @@ The tests will verify leader election behavior:
 
 ```console
 $ lsfr test leader-election
-Testing leader-election: Raft Leader Election
+Testing leader-election: Cluster Elects and Maintains Leader
 
 ✓ Leader Election Completes
 ✓ Exactly One Leader Per Term
@@ -199,7 +199,7 @@ Example failure:
 
 ```console
 $ lsfr test
-Testing leader-election: Raft Leader Election
+Testing leader-election: Cluster Elects and Maintains Leader
 
 ✓ Leader Election Completes
 ✓ Exactly One Leader Per Term

@@ -15,7 +15,7 @@ State what the system needs to accomplish, not how to build it. Point to possibl
 
 Structure learning through progressive disclosure. Start each challenge with the simplest version of a problem, then add complexity only after the foundation is solid. Make each stage build on previous work so the progression feels natural rather than arbitrary.
 
-Introduce one major capability per stage: one testable system behavior that builds on previous work. Supporting concepts can appear as needed, but each stage should add one clear building block to the system.
+Introduce one major capability per stage: one testable system behavior that builds on previous work. Supporting concepts can appear as needed, but each stage should add one clear building block to the system. Describe stages based on the capability they add, not the mechanism used to achieve it. This keeps focus on what the system accomplishes at each stage.
 
 Constrain interfaces and contracts that affect testing or compatibility. Leave internal implementation details (data structures, algorithms, optimizations) to the reader's judgment.
 
