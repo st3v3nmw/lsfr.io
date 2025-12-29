@@ -100,7 +100,7 @@ Values are stored as UTF-8 encoded text and can contain:
 Your server must accept `--port` and `--working-dir` flags:
 
 ```console
-$ ./run.sh --port 8080 --working-dir .lsfr/run-20251226-210357
+$ ./run.sh --port 8001 --working-dir .lsfr/run-20251226-210357
 ```
 
 `--working-dir` is your server's working directory. Any files you create should go here, and your server's logs will be in `node.log`.

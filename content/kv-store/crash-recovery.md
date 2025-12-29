@@ -77,7 +77,7 @@ Organize these in the working directory however makes sense - separate files, su
 Your server will be started with the working directory:
 
 ```console
-$ ./run.sh --port 8080 --working-dir .lsfr/run-20251226-210357
+$ ./run.sh --port 8001 --working-dir .lsfr/run-20251226-210357
 ```
 
 Your server will be tested with unexpected crashes:
@@ -96,7 +96,7 @@ PASSED ✓
 Run 'lsfr next' to advance to the next stage.
 ```
 
-The test will:
+The tests will:
 
 1. Store data in your server
 2. Kill the server process (SIGKILL) without warning

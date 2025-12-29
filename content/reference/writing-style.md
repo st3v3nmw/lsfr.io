@@ -39,4 +39,4 @@ Use code blocks to show test invocations, command-line usage, and expected outpu
 
 Reserve callouts for critical non-obvious concerns. Don't use them for general information that belongs in body text.
 
-Link concepts inline when they first appear. Add comprehensive resources like books, lecture series, & reference implementations to the challenge's index page.
+Link concepts inline when they first appear. Add comprehensive resources like books, lecture series, and reference implementations to the challenge's index page.

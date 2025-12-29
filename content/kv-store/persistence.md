@@ -37,7 +37,7 @@ This approach survives clean shutdowns but not crashes. If the process dies unex
 Your server will be started with the working directory where it should store data:
 
 ```console
-$ ./run.sh --port 8080 --working-dir .lsfr/run-20251226-210357
+$ ./run.sh --port 8001 --working-dir .lsfr/run-20251226-210357
 ```
 
 You can test your implementation using the `lsfr` command:
@@ -55,7 +55,7 @@ PASSED ✓
 Run 'lsfr next' to advance to the next stage.
 ```
 
-The test will:
+The tests will:
 
 1. Store data in your server
 2. Send SIGTERM to trigger graceful shutdown

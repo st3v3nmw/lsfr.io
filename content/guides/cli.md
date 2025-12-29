@@ -70,7 +70,7 @@ $ lsfr new kv-store           # Create in current directory
 $ lsfr new kv-store my-kvs    # Create in ./my-kvs
 ```
 
-### 2. Implement and Test
+### 2. Implement & Test
 
 Edit `run.sh` to start your implementation. The script must launch your server and pass through any arguments from `lsfr`:
 

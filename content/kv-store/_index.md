@@ -59,7 +59,7 @@ If you haven't already, read [this overview](/how-lsfr-works/) on how _lsfr_ wor
 
 ### Papers
 
-- [Raft Paper](https://raft.github.io/raft.pdf) by Diego Ongaro & John Ousterhout
+- [The Raft Paper](https://raft.github.io/raft.pdf) by Diego Ongaro & John Ousterhout
 
 ### Videos
 
