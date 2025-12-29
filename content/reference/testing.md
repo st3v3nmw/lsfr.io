@@ -27,16 +27,17 @@ func HTTPAPI() *Suite {
 
         // 1
         Test("PUT stores data", func(do *Do) {
-            do.HTTP("node", "PUT", "/kv/key", "value").
-                Returns().Status(Is(200)).
+            do.HTTP("node", "PUT", "/kv/key", "value").T().
+                Status(Is(200)).
                 Assert("Your server should accept PUT requests.\n" +
                     "Ensure your HTTP handler processes PUT to /kv/{key}.")
         }).
 
         // 2
         Test("GET retrieves data", func(do *Do) {
-            do.HTTP("node", "GET", "/kv/key").
-                Returns().Status(Is(200)).Body(Is("value")).
+            do.HTTP("node", "GET", "/kv/key").T().
+                Status(Is(200)).
+                Body(Is("value")).
                 Assert("Your server should return stored values.")
         })
 }
@@ -50,23 +51,24 @@ Make HTTP requests and validate responses:
 
 ```go
 // Basic request
-do.HTTP("node", "GET", "/kv/key").
-    Returns().Status(Is(200)).Body(Is("value")).
+do.HTTP("node", "GET", "/kv/key").T().
+    Status(Is(200)).
+    Body(Is("value")).
     Assert("Your server should return stored values.")
 
 // With body
-do.HTTP("node", "PUT", "/kv/key", "value").
-    Returns().Status(Is(200)).
+do.HTTP("node", "PUT", "/kv/key", "value").T().
+    Status(Is(200)).
     Assert("Your server should accept PUT requests.")
 
 // With custom headers
-do.HTTP("node", "POST", "/api", `{"key":"value"}`, H{"Content-Type": "application/json"}).
-    Returns().Status(Is(201)).
+do.HTTP("node", "POST", "/api", `{"key":"value"}`, H{"Content-Type": "application/json"}).T().
+    Status(Is(201)).
     Assert(...)
 
 // Status only
-do.HTTP("node", "DELETE", "/kv/key").
-    Returns().Status(Is(200)).
+do.HTTP("node", "DELETE", "/kv/key").T().
+    Status(Is(200)).
     Assert("Your server should accept DELETE requests.")
 ```
 
@@ -76,13 +78,14 @@ Execute CLI commands and validate output:
 
 ```go
 // Check exit code and output
-do.Exec("--help").
-    Returns().ExitCode(Is(0)).Output(Contains("Usage:")).
+do.Exec("--help").T().
+    ExitCode(Is(0)).
+    Output(Contains("Usage:")).
     Assert("Your command should show usage information.")
 
 // Check exit code only
-do.Exec("invalid", "args").
-    Returns().ExitCode(Is(1)).
+do.Exec("invalid", "args").T().
+    ExitCode(Is(1)).
     Assert("Your command should reject invalid arguments.")
 ```
 
@@ -134,6 +137,57 @@ Negates another matcher:
 .Body(Not(Contains("panic")))
 ```
 
+### Multiple Matchers
+
+Chain multiple matchers for the same field:
+
+```go
+// Multiple status checks
+do.HTTP("node", "GET", "/").T().
+    Status(Is(200), Not(Is(404)), Not(Is(500))).
+    Assert("Should return 200 OK")
+
+// Multiple body checks
+do.HTTP("node", "GET", "/").T().
+    Status(Is(200)).
+    Body(Contains("Hello"), Contains("World"), Not(Contains("Goodbye"))).
+    Assert("Should contain Hello and World but not Goodbye")
+```
+
+All matchers for a field must pass. If any matcher fails, the assertion fails.
+
+### JSON(path, matchers...)
+
+Extract and validate JSON fields:
+
+```go
+// Simple field
+do.HTTP("node", "GET", "/cluster/info").T().
+    Status(Is(200)).
+    JSON("role", Is("follower")).
+    JSON("term", Is("1")).
+    Assert("Should return cluster info")
+
+// Nested path using dot notation
+do.HTTP("node", "GET", "/log").T().
+    Status(Is(200)).
+    JSON("entries.0.term", Is("1")).
+    JSON("entries.1.index", Is("1")).
+    Assert("Should return log entries")
+
+// Check for null
+do.HTTP("node", "GET", "/cluster/info").T().
+    Status(Is(200)).
+    JSON("leader", IsNull[string]()).
+    Assert("Leader should be null when no leader elected")
+
+// Multiple matchers on same field
+do.HTTP("node", "GET", "/cluster/info").T().
+    Status(Is(200)).
+    JSON("role", Is("leader"), Not(Is("follower")), Not(Is("candidate"))).
+    Assert("Node should be leader")
+```
+
 ## Timing
 
 ### Eventually()
@@ -143,14 +197,16 @@ Retry until condition becomes true or timeout (default 5s):
 ```go
 // Wait for replica to sync
 do.HTTP("replica", "GET", "/kv/key").
-    Eventually().
-    Returns().Status(Is(200)).Body(Is("value")).
+    Eventually().T().
+    Status(Is(200)).
+    Body(Is("value")).
     Assert("Replica should eventually receive replicated data.")
 
 // Custom timeout
 do.HTTP("replica", "GET", "/kv/key").
-    Eventually().Within(10 * time.Second).
-    Returns().Status(Is(200)).Body(Is("value")).
+    Eventually().Within(10 * time.Second).T().
+    Status(Is(200)).
+    Body(Is("value")).
     Assert("Replica should sync within 10 seconds.")
 ```
 
@@ -161,14 +217,16 @@ Verify condition stays true for duration (default 5s):
 ```go
 // Verify value remains stable
 do.HTTP("node", "GET", "/kv/key").
-    Consistently().
-    Returns().Status(Is(200)).Body(Is("value")).
+    Consistently().T().
+    Status(Is(200)).
+    Body(Is("value")).
     Assert("Value should remain stable.")
 
 // Custom duration
 do.HTTP("node", "GET", "/kv/key").
-    Consistently().For(2 * time.Second).
-    Returns().Status(Is(200)).Body(Is("value")).
+    Consistently().For(2 * time.Second).T().
+    Status(Is(200)).
+    Body(Is("value")).
     Assert("Value should remain stable for 2 seconds.")
 ```
 
@@ -177,8 +235,8 @@ do.HTTP("node", "GET", "/kv/key").
 Without `Eventually()` or `Consistently()`, checks execute once immediately:
 
 ```go
-do.HTTP("node", "GET", "/kv/key").
-    Returns().Status(Is(200)).
+do.HTTP("node", "GET", "/kv/key").T().
+    Status(Is(200)).
     Assert("Your server should return the value immediately.")
 ```
 
@@ -236,23 +294,25 @@ Run operations in parallel:
 ```go
 do.Concurrently(
     func() {
-        do.HTTP("node", "PUT", "/kv/key1", "value1").
-            Returns().Status(Is(200)).
+        do.HTTP("node", "PUT", "/kv/key1", "value1").T().
+            Status(Is(200)).
             Assert(...)
     },
     func() {
-        do.HTTP("node", "PUT", "/kv/key2", "value2").
-            Returns().Status(Is(200)).
+        do.HTTP("node", "PUT", "/kv/key2", "value2").T().
+            Status(Is(200)).
             Assert(...)
     },
 )
 
 // Verify both succeeded
-do.HTTP("node", "GET", "/kv/key1").
-    Returns().Status(Is(200)).Body(Is("value1")).
+do.HTTP("node", "GET", "/kv/key1").T().
+    Status(Is(200)).
+    Body(Is("value1")).
     Assert(...)
-do.HTTP("node", "GET", "/kv/key2").
-    Returns().Status(Is(200)).Body(Is("value2")).
+do.HTTP("node", "GET", "/kv/key2").T().
+    Status(Is(200)).
+    Body(Is("value2")).
     Assert(...)
 ```
 
@@ -326,15 +386,16 @@ func HTTPAPI() *Suite {
 
         // 1
         Test("PUT Basic Operations", func(do *Do) {
-            do.HTTP("node", "PUT", "/kv/key", "value").
-                Returns().Status(Is(200)).
+            do.HTTP("node", "PUT", "/kv/key", "value").T().
+                Status(Is(200)).
                 Assert("Your server should accept PUT requests.")
         }).
 
         // 2
         Test("GET Basic Operations", func(do *Do) {
-            do.HTTP("node", "GET", "/kv/key").
-                Returns().Status(Is(200)).Body(Is("value")).
+            do.HTTP("node", "GET", "/kv/key").T().
+                Status(Is(200)).
+                Body(Is("value")).
                 Assert("Your server should return stored values.")
         })
 }

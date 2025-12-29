@@ -124,9 +124,10 @@ Response:
     {
       "role": "leader|candidate|follower",
       "term": <int>,
-      "leader": ":<port>",      # null if no known leader
-      "voted-for": ":<port>"    # null if haven't voted this term
-                                # own address if voted for self
+      "leader": ":<port>",         # null if no known leader
+      "voted-for": ":<port>",      # null if haven't voted this term
+                                   # own address if voted for self
+      "peers": [":<port>", ...]    # all cluster members, sorted lexicographically
     }
 ```
 
