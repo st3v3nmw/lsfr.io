@@ -103,7 +103,7 @@ Your server must accept `--port` and `--working-dir` flags:
 $ ./run.sh --port 8001 --working-dir .lsfr/run-20251226-210357
 ```
 
-`--working-dir` is your server's working directory. Any files you create should go here, and your server's logs will be in `node.log`.
+For this stage, you only need `--port` to start your HTTP server. The `--working-dir` parameter will become important in the next stage when you add persistence. For now, it's just where your server's logs end up (`node.log`).
 
 You can test your implementation using the `lsfr` command:
 
@@ -129,6 +129,8 @@ Run 'lsfr next' to advance to the next stage.
 
 ### Debugging
 
+Your server's output (`stdout`/`stderr`) is captured in `node.log` inside the working directory. Add your own logging to help debug issues.
+
 When tests fail, `lsfr` will show you exactly what went wrong:
 
 ```console
@@ -151,5 +153,3 @@ FAILED ✗
 
 Read the guide: lsfr.io/kv-store/http-api
 ```
-
-You can also add your own logging to help debug. Your server's output (stdout/stderr) is captured in `node.log` inside the working directory.
