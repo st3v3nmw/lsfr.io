@@ -107,7 +107,7 @@ do.Exec("invalid", "args").T().
     Assert("Your command should reject invalid arguments.")
 ```
 
-## Matchers
+## Checkers
 
 ### `Is(value)`
 
@@ -157,18 +157,18 @@ Match any of several values:
 .Body(OneOf("value1", "value2", "value3"))
 ```
 
-### `Not(matcher)`
+### `Not(checker)`
 
-Negates another matcher:
+Negates another checker:
 
 ```go
 .Status(Not(Is(500)))
 .Body(Not(Contains("panic")))
 ```
 
-### Multiple Matchers
+### Multiple Checkers
 
-Chain multiple matchers for the same field:
+Chain multiple checkers for the same field:
 
 ```go
 // Multiple status checks
@@ -181,7 +181,7 @@ Chain multiple matchers for the same field:
 JSON("role", Is("leader"), Not(Is("follower")), Not(Is("candidate")))
 ```
 
-All matchers for a field must pass. If any matcher fails, the assertion fails.
+All checkers for a field must pass. If any checker fails, the assertion fails.
 
 ## Timing
 
