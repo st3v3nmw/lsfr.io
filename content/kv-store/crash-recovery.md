@@ -5,7 +5,8 @@ weight: 3
 
 # Crash Recovery
 
-Your server currently saves data on clean shutdown but loses everything if it crashes. In this stage, you'll add durability so data survives unexpected failures.
+Your server currently saves data on clean shutdown but loses everything if it crashes.
+In this stage, you'll add durability so data survives unexpected failures.
 
 ## Write-Ahead Logging
 
@@ -29,7 +30,12 @@ After appending an operation to the log, ensure it's physically written to disk 
 Without sync, the OS may buffer writes in memory and you'll lose data on crash.
 
 > [!WARNING]
-> Syncing on every operation is slow since you're forcing a disk write and blocking the response. This is the correct trade-off for durability, but it limits throughput. Production databases use techniques like batching to amortize the fsync cost across multiple operations.
+> Syncing on every operation is slow since you're forcing a disk write and blocking the response.
+> Additionally, holding locks during synchronous disk I/O creates severe contention under concurrent load:
+> multiple writers queue up waiting for the disk, serializing operations that could otherwise proceed in parallel.
+>
+> This is the correct trade-off for durability in a simple implementation, but it limits both throughput and concurrency.
+> Production databases use techniques like batching to amortize the `fsync` cost across multiple operations and reduce lock hold times.
 
 ## Recovery Procedure
 
