@@ -32,7 +32,7 @@ If no previous data exists, start with an empty store.
 
 ## Storage
 
-Save your in-memory state to disk during shutdown and restore it on startup. Create your data files in the working directory (passed via `--working-dir`). The serialization format and file naming are up to you - JSON, binary, plain text, whatever.
+Save your in-memory state to disk during shutdown and restore it on startup. Create your data files in the working directory (passed via `--working-dir`). The serialization format and file naming are up to you - JSON, binary ([Protocol Buffers](https://protobuf.dev/), [MessagePack](https://msgpack.org/index.html), [BSON](https://bsonspec.org/), [gob](https://pkg.go.dev/encoding/gob), [pickle](https://docs.python.org/3/library/pickle.html)), plain text, whatever.
 
 This approach survives clean shutdowns but not crashes. If the process dies unexpectedly, you'll lose any data that wasn't saved. That's fine for this stage - you'll add crash recovery in the next stage.
 
@@ -65,3 +65,7 @@ The tests will:
 2. Send SIGTERM to trigger graceful shutdown
 3. Restart your server
 4. Verify all data is still present
+
+## Resources
+
+- [Designing Data-Intensive Applications Chapter 4: Encoding and Evolution](https://dataintensive.net/) by Martin Kleppmann

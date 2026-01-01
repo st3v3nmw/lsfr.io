@@ -17,3 +17,7 @@ weight: 7
 - Log consistency checks (prevLogIndex, prevLogTerm)
 - Truncate conflicting uncommitted entries
 - Leader completeness property
+
+## Resources
+
+- [Designing Data-Intensive Applications Chapter 8: The Trouble with Distributed Systems](https://dataintensive.net/) by Martin Kleppmann

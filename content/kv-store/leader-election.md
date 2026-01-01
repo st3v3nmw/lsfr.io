@@ -226,3 +226,5 @@ Read the guide: lsfr.io/kv-store/leader-election
 - [The Raft Consensus Algorithm](https://raft.github.io/)
 - [Distributed Systems 6.2: Raft](https://www.youtube.com/watch?v=uXEYuDwm7e4) by Martin Kleppmann
 - [Students' Guide to Raft](https://thesquareplanet.com/blog/students-guide-to-raft/) by Jon Gjengset
+- [Database Internals Chapter 10: Leader Election](https://www.databass.dev/) by Alex Petrov
+- [Database Internals Chapter 14: Consensus](https://www.databass.dev/) by Alex Petrov
