@@ -42,3 +42,8 @@ POST /cluster/leave
 Response:
   - 200 OK: Successfully initiated removal from cluster
 ```
+
+## Resources
+
+- [The Raft Consensus Algorithm](https://raft.github.io/)
+- [Students' Guide to Raft](https://thesquareplanet.com/blog/students-guide-to-raft/) by Jon Gjengset

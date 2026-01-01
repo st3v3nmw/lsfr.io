@@ -18,3 +18,11 @@ weight: 5
 - Fsync log entries before responding to client
 - nextIndex and matchIndex tracking per follower
 - Happy path only - no crashes/failures yet
+
+## Resources
+
+- [The Raft Consensus Algorithm](https://raft.github.io/)
+- [Distributed Systems 6.2: Raft](https://www.youtube.com/watch?v=uXEYuDwm7e4) by Martin Kleppmann
+- [Students' Guide to Raft](https://thesquareplanet.com/blog/students-guide-to-raft/) by Jon Gjengset
+- [Database Internals Chapter 14: Consensus](https://www.databass.dev/) by Alex Petrov
+- [Designing Data-Intensive Applications Chapter 5: Replication](https://dataintensive.net/) by Martin Kleppmann
