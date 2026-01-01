@@ -75,6 +75,10 @@ Unsupported HTTP methods on any endpoint should return:
 A simple in-memory [map/dictionary](https://en.wikipedia.org/wiki/Associative_array) is sufficient for storage in this stage.
 You'll add persistence in the next stage.
 
+> [!NOTE]
+> This challenge focuses on distributed systems concerns (consensus, replication, fault tolerance), not database storage engines.
+> The entire dataset should fit in memory. Managing larger-than-memory datasets is out of scope.
+
 ### Data Model
 
 Keys and values are stored as simple strings. This keeps the data model straightforward so you can focus on building intuition in distributed systems, not implementing complex data types.
@@ -83,9 +87,9 @@ Keys and values are stored as simple strings. This keeps the data model straight
 
 Keys must contain only alphanumeric plus `:`, `_`, `.`, and `-` characters. Examples of valid keys:
 
-- `country:capital`
-- `user_123`
-- `special:key-with_symbols.123`
+- `user:123`
+- `cache_entry`
+- `metric.latency.p99`
 
 #### Values
 

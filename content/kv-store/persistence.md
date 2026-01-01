@@ -10,11 +10,15 @@ Data should survive clean shutdowns and be restored when the server restarts.
 
 ## Graceful Shutdown
 
-When your server receives a SIGTERM signal, it should:
+When your server receives a termination signal (SIGTERM or SIGINT), it should:
 
-1. Wait for in-flight requests to complete (within 5 seconds)
+1. Wait for in-flight requests to complete (within 15 seconds)
 2. Save all key-value pairs to disk
 3. Exit with status code `0`
+
+> [!NOTE]
+> The 15-second timeout is more generous than typical production systems to accommodate varying execution speeds across implementation languages.
+> This ensures implementations in slower languages can still pass tests reliably.
 
 ## Startup Recovery
 
