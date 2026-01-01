@@ -148,6 +148,26 @@ Regex matching:
 .Output(Matches(`version \d+\.\d+\.\d+`))
 ```
 
+### `HasLen[T](length)`
+
+Validates that a value has a specific length. Works on arrays, slices, maps, channels, and strings:
+
+```go
+// String body length
+.Body(HasLen[string](5))
+
+// JSON array length
+.JSON("items", HasLen[string](3))
+
+// JSON string field length
+.JSON("name", HasLen[string](5))
+
+// Empty arrays
+.JSON("items", HasLen[string](0))
+```
+
+Requires a type parameter to specify the field type being checked.
+
 ### `OneOf(values...)`
 
 Match any of several values:
