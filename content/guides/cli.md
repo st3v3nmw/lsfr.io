@@ -129,7 +129,7 @@ Advances to the next stage after verifying the current stage passes. Updates `ls
 
 If the current stage hasn't been completed, `lsfr next` runs tests first and only advances if they pass.
 
-If you're on GitHub, consider tagging your repo with `lsfr` and `lsfr-<language>` (e.g., `lsfr-go`, `lsfr-rust`) to share your implementation.
+If you're on GitHub, consider adding `lsfr` and `lsfr-<language>` (e.g., `lsfr-go`, `lsfr-rust`) as topics to your repository to share your implementation.
 
 ## Commands Reference
 

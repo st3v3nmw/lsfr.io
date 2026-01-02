@@ -49,6 +49,6 @@ Pass the current stage, then run `lsfr next` to unlock the next stage. Each stag
 
 By the end of the challenge, you'll have a deep understanding of how these systems actually work because you built one yourself.
 
-If you're on GitHub, consider tagging your repo with `lsfr` and `lsfr-<language>` (e.g., `lsfr-go`, `lsfr-rust`) to share your implementation.
+If you're on GitHub, consider adding `lsfr` and `lsfr-<language>` (e.g., `lsfr-go`, `lsfr-rust`) as topics to your repository to share your implementation.
 
 Good luck! 🚀
