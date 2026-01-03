@@ -8,7 +8,7 @@ You know that feeling when you read about Raft consensus or consistent hashing a
 
 ## Project-Based Learning
 
-Learn by building complete, real-world systems rather than doing isolated exercises. You'll implement actual distributed databases, message queues, and compilers that mirror production systems.
+Learn by building complete, real-world systems rather than doing isolated exercises. You'll build distributed systems from scratch: key-value stores, message queues, caches, blockchains, and more. Learn consensus algorithms, replication strategies, and fault tolerance by implementing real-world patterns.
 
 ```console
 $ lsfr init kv-store

@@ -7,13 +7,13 @@ weight: 1
 
 Reading about how systems work is one thing. Building them is another.
 
-_lsfr_ breaks down complex systems into stages you can actually implement. Build a distributed database, write a compiler, or create a message queue from scratch. Each challenge starts simple and adds complexity one stage at a time.
+_lsfr_ breaks down complex distributed systems into manageable stages you can actually implement. Build distributed systems from scratch: databases, caches, message queues, lock services, and more. Each challenge teaches different distributed systems patterns like consensus, replication, partitioning, and fault tolerance. Each challenge starts simple and adds complexity one stage at a time.
 
 You write real code that actually works. Tests verify your implementation handles the hard problems: network failures, crash recovery, concurrent access, etc. By the end, you understand these systems because you've built them yourself.
 
 ## Challenges
 
-Each challenge breaks down a complex system into manageable stages that can be built incrementally. For instance, the [distributed key-value store challenge](/kv-store/) starts with a simple in-memory store with a HTTP API and by the end, you have a sharded distributed key-value store.
+Each challenge breaks down a distributed system into manageable stages that can be built incrementally. For instance, the [distributed key-value store challenge](/kv-store/) starts with a simple in-memory store with a HTTP API and by the end, you have a sharded distributed key-value store.
 
 Each stage comes with tests that simulate real-world scenarios like network failures and crash recovery. The tests verify your system's behavior, not implementation details, so you're free to choose your own data structures, algorithms, and approaches. These are essentially end-to-end tests that check if your system actually works.
 
