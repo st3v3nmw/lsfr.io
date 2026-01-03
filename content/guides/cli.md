@@ -15,10 +15,29 @@ $ go install github.com/st3v3nmw/lsfr/cmd/lsfr@latest
 
 This installs `lsfr` to your `$GOPATH/bin` directory. Make sure it's in your `$PATH`.
 
+You can also install a specific version using tags (see [available versions](https://github.com/st3v3nmw/lsfr/tags)):
+
+```console
+$ go install github.com/st3v3nmw/lsfr/cmd/lsfr@v0.1.0
+```
+
 #### Update
 
 ```console
 $ go install github.com/st3v3nmw/lsfr/cmd/lsfr@latest
+```
+
+### Homebrew
+
+```console
+$ brew tap st3v3nmw/tap
+$ brew install st3v3nmw/tap/lsfr
+```
+
+#### Update
+
+```console
+$ brew upgrade st3v3nmw/tap/lsfr
 ```
 
 ### Verify Installation
