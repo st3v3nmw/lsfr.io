@@ -65,6 +65,7 @@ Edit `run.sh` to launch your implementation, then run `lsfr test` to get feedbac
 > Commands support short aliases for faster typing:
 > - `lsfr i` → `lsfr init`
 > - `lsfr t` → `lsfr test`
+> - `lsfr n` → `lsfr next`
 > - `lsfr s` → `lsfr status`
 > - `lsfr l` or `lsfr ls` → `lsfr list`
 
