@@ -27,7 +27,7 @@ All nodes start as followers. If a follower doesn't receive heartbeats within th
 
 Candidates request votes from other nodes. A candidate becomes leader if it receives votes from a majority ($\lceil (n+1)/2 \rceil$ where $n$ is cluster size; 3 votes for a 5-node cluster). Each node grants at most one vote per term.
 
-Terms act as a logical clock. When a node discovers a higher term, it immediately updates its term and reverts to follower.
+Terms act as a [logical clock](https://en.wikipedia.org/wiki/Logical_clock). When a node discovers a higher term, it immediately updates its term and reverts to follower.
 
 ## Heartbeats
 
@@ -36,7 +36,8 @@ Leaders send `AppendEntries` RPC heartbeats every **100ms** to maintain authorit
 If a follower doesn't receive heartbeats within the election timeout, it starts a new election.
 
 > [!NOTE]
-> These timing values are more conservative than the Raft paper's suggested 150-300ms election timeout. The larger ratio (5-10x) between heartbeat interval and election timeout accounts for varying execution speeds across different implementation languages and prevents spurious elections caused by garbage collection pauses or interpreter overhead.
+> These timing values are more generous than the Raft paper's suggested 150-300ms election timeout. The larger timeouts provide tolerance for occasional runtime pauses (such as garbage collection) and network delays, reducing the likelihood of spurious elections.
+> This helps ensure varying implementations can pass tests reliably.
 
 ## Client Requests
 

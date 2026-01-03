@@ -17,8 +17,8 @@ When your server receives a termination signal (SIGTERM or SIGINT), it should:
 3. Exit with status code `0`
 
 > [!NOTE]
-> The 15-second timeout is more generous than typical production systems to accommodate varying execution speeds across implementation languages.
-> This ensures implementations in slower languages can still pass tests reliably.
+> The 15-second timeout is more generous than typical production systems to provide a safe margin for completing in-flight requests and persistence operations.
+> This helps ensure varying implementations can pass tests reliably.
 
 ## Startup Recovery
 
