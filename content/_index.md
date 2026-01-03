@@ -16,6 +16,7 @@ Created challenge in current directory.
   run.sh       - Builds and runs your implementation
   README.md    - Challenge overview and requirements
   lsfr.yaml    - Tracks your progress
+  .gitignore   - Ignores .lsfr/ working directory (server files and logs)
 
 Implement http-api stage, then run 'lsfr test'.
 ```
