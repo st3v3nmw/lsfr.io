@@ -56,7 +56,7 @@ Start with: lsfr init <challenge-name>
 ```console
 $ lsfr init kv-store    # Create challenge in current directory
 $ lsfr test             # Test your implementation
-$ lsfr next             # Advance to next stage
+$ lsfr next             # Advance to the next stage
 ```
 
 Edit `run.sh` to launch your implementation, then run `lsfr test` to get feedback.
