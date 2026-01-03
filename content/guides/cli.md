@@ -29,22 +29,22 @@ Available challenges:
 
   kv-store             - Distributed Key-Value Store (8 stages)
 
-Start with: lsfr new <challenge-name>
+Start with: lsfr init <challenge-name>
 ```
 
 ## Quick Start
 
 ```console
-$ lsfr new kv-store    # Create challenge in current directory
-$ lsfr test            # Test your implementation
-$ lsfr next            # Advance to next stage
+$ lsfr init kv-store    # Create challenge in current directory
+$ lsfr test             # Test your implementation
+$ lsfr next             # Advance to next stage
 ```
 
 Edit `run.sh` to launch your implementation, then run `lsfr test` to get feedback.
 
 > [!NOTE]
 > Commands support short aliases for faster typing:
-> - `lsfr n` → `lsfr new`
+> - `lsfr i` → `lsfr init`
 > - `lsfr t` → `lsfr test`
 > - `lsfr s` → `lsfr status`
 > - `lsfr l` or `lsfr ls` → `lsfr list`
@@ -54,25 +54,26 @@ Edit `run.sh` to launch your implementation, then run `lsfr test` to get feedbac
 ### 1. Start a Challenge
 
 ```console
-$ lsfr new <challenge> [path]
+$ lsfr init <challenge> [path]
 ```
 
 Creates a new challenge directory with:
-- `run.sh` - Script that launches your implementation
+- `run.sh` - Script that builds and runs your implementation
 - `README.md` - Challenge overview and requirements
-- `lsfr.yaml` - Progress tracking
-- `.gitignore` - Ignores `.lsfr/` directory
+- `lsfr.yaml` - Tracks your progress
+- `.gitignore` - Ignores `.lsfr/` working directory (server files and logs)
 
 **Examples:**
 
 ```console
-$ lsfr new kv-store           # Create in current directory
-$ lsfr new kv-store my-kvs    # Create in ./my-kvs
+$ lsfr init kv-store           # Create in current directory
+$ lsfr init kv-store my-kvs    # Create in ./my-kvs
 ```
 
 ### 2. Implement & Test
 
-Edit `run.sh` to start your implementation. The script must launch your server and pass through any arguments from `lsfr`:
+Edit `run.sh` to start your implementation.
+The script must launch your server and pass through any arguments from `lsfr`:
 
 ```bash
 #!/bin/bash -e
@@ -133,9 +134,11 @@ If you're on GitHub, consider adding `lsfr` and `lsfr-<language>` (e.g., `lsfr-g
 
 ## Commands Reference
 
-### lsfr new
+Run `lsfr --help` to see all available commands, or `lsfr <command> --help` for command-specific options.
 
-**Usage:** `lsfr new <challenge> [path]`
+### lsfr init
+
+**Usage:** `lsfr init <challenge> [path]`
 
 Creates a new challenge in the specified directory (or current directory if not specified).
 
@@ -166,9 +169,7 @@ Shows challenge progress and next steps:
 $ lsfr status
 Distributed Key-Value Store
 
-In this challenge, you'll build a distributed key-value store from scratch.
-You'll start with a single-node system that handles persistence and crash recovery,
-then implement Raft's leader election, log replication, and fault tolerance mechanisms.
+Build a distributed key-value store from scratch using the Raft consensus algorithm.
 
 Progress:
 ✓ http-api           - Store and Retrieve Data
@@ -204,7 +205,3 @@ stages:
 ```
 
 You can edit this manually to jump between stages or reset progress. You can also use `lsfr test <stage>` to test any stage without changing your current progress.
-
-## CI/CD
-
-Want to run tests automatically in your CI pipeline? See the [CI/CD guide](/guides/ci-cd/) for GitHub Actions and other CI systems.

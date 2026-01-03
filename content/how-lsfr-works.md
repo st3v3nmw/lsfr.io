@@ -31,11 +31,12 @@ Start with the [distributed key-value store challenge](/kv-store/); it's a great
 
 ### Scaffolding
 
-Run `lsfr new kv-store` to create a new challenge directory with:
+Run `lsfr init kv-store` to create a new challenge directory with:
 
 - `run.sh` - Builds and runs your implementation
 - `README.md` - Challenge overview and requirements
 - `lsfr.yaml` - Tracks your progress
+- `.gitignore` - Ignores `.lsfr/` working directory (server files and logs)
 
 Update `run.sh` with the commands to build and run your implementation. You can use _any_ language - Go, Python, Rust, even Ponylang - as long as `run.sh` can start your program and pass through any command-line arguments from `lsfr test`.
 

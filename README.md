@@ -28,8 +28,8 @@ For major changes or new challenges, please open an issue first to discuss.
 
 This site is built with [Hugo](https://gohugo.io/). To run locally:
 
-```bash
-hugo server -D
+```console
+$ hugo server -D
 ```
 
 Visit [http://localhost:1313](http://localhost:1313) to preview.
