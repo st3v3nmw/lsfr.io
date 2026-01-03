@@ -1,6 +1,6 @@
 # lsfr.io
 
-_Challenge documentation and content for [lsfr](https://github.com/st3v3nmw/lsfr)._
+_Build distributed systems from scratch._
 
 This repository contains the documentation, challenge definitions, and guides that power [lsfr.io](https://lsfr.io).
 
