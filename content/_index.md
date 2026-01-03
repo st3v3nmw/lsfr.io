@@ -10,8 +10,8 @@ You know that feeling when you read about Raft consensus or consistent hashing a
 
 Learn by building complete, real-world systems rather than doing isolated exercises. You'll implement actual distributed databases, message queues, and compilers that mirror production systems.
 
-```bash
-$ lsfr new kv-store
+```console
+$ lsfr init kv-store
 Created challenge in current directory.
   run.sh       - Builds and runs your implementation
   README.md    - Challenge overview and requirements
@@ -26,7 +26,7 @@ Each stage introduces one new concept only after you've solidified the previous 
 
 The tests verify your system works by running it and checking behavior, not implementation details, so you can focus on learning the concepts without wrestling with complex setup.
 
-```bash
+```console
 $ lsfr test
 Testing http-api: Store and Retrieve Data
 
@@ -48,7 +48,7 @@ Run 'lsfr next' to advance to the next stage.
 
 When you're ready, advance to the next stage:
 
-```bash
+```console
 $ lsfr next
 Advanced to persistence: Data Persistence
 
@@ -63,13 +63,13 @@ Run 'lsfr test' when ready.
 
 All tests, tooling, reference implementations, and this website are open source. Check out [_lsfr's_ source code](https://github.com/st3v3nmw/lsfr) and this [website's source code](https://github.com/st3v3nmw/lsfr.io).
 
-```bash
+```console
 $ lsfr list
 Available challenges:
 
   kv-store             - Distributed Key-Value Store (8 stages)
 
-Start with: lsfr new <challenge-name>
+Start with: lsfr init <challenge-name>
 ```
 
 ## Ready to Build?
