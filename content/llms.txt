@@ -1,9 +1,10 @@
 # lsfr
 
-lsfr is a platform for learning how to build complex systems from scratch through
-incremental, stage-based challenges. Developers implement real distributed databases,
-compilers, message queues, etc in any language, verified by behavioral tests rather
-than implementation checks.
+lsfr is a platform for learning distributed systems and databases through incremental,
+project-based challenges. Developers build real distributed systems (consensus-based
+stores, leaderless caches, message queues, blockchains, CRDTs) in any language,
+verified by behavioral tests that simulate network failures, crashes, and real-world
+scenarios.
 
 ## Main Pages
 

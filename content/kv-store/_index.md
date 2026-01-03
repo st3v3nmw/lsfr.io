@@ -8,9 +8,9 @@ bookCollapseSection: true
 
 Welcome to the distributed key-value store challenge!
 
-In this challenge, you'll build a distributed key-value store from scratch. You'll start with a single-node system that handles persistence and crash recovery, then implement Raft's leader election, log replication, and fault tolerance mechanisms.
+You'll build a distributed key-value store from scratch using Raft consensus, the same algorithm that powers [etcd](https://etcd.io/) and [Consul](https://developer.hashicorp.com/consul). Start with a single-node system that handles persistence and crash recovery, then implement leader election, log replication, and fault tolerance.
 
-By the end, you'll have built a production-grade distributed system that maintains strong consistency guarantees even during node failures and network partitions.
+This is the first project in _lsfr_'s distributed systems series. It teaches consensus-based replication; later projects will teach different patterns like leaderless replication, CRDTs, and Byzantine fault tolerance.
 
 ## Stages
 
